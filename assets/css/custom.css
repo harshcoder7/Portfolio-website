@@ -72,9 +72,18 @@ body:has(.hero) main {
 }
 
 body:has(.hero) footer {
-  padding-top: 0.8em;
+  padding-top: 1.5em;
+  border-top: none;
   width: 100%;
   max-width: var(--container-width);
+}
+
+body:has(.hero) .footer-links {
+  text-align: center;
+}
+
+body:has(.hero) footer p {
+  text-align: center;
 }
 
 /* ─── Hero section on homepage ─── */
@@ -83,31 +92,31 @@ body:has(.hero) footer {
 }
 
 .hero-name {
-  font-size: 2.8em;
+  font-size: 2em;
   font-weight: bold;
   color: #ffffff !important;
   letter-spacing: -0.02em;
-  margin: 0 0 0.4em 0;
+  margin: 0 0 0.8em 0;
   line-height: 1.1;
 }
 
 .hero-tagline {
-  font-size: 1.3em;
+  font-size: 1.05em;
   color: #b0b0b0 !important;
-  margin: 0 0 0.4em 0;
+  margin: 0 0 0.8em 0;
   font-style: italic;
 }
 
 .hero-bio {
-  font-size: 1.05em;
+  font-size: 0.9em;
   color: #d0d0d0 !important;
   line-height: 1.7;
   max-width: 55ch;
-  margin: 0 0 0.4em 0;
+  margin: 0 0 0.8em 0;
 }
 
 .hero-sub {
-  font-size: 0.95em;
+  font-size: 0.85em;
   color: #777 !important;
   margin: 0;
   font-style: italic;
@@ -157,8 +166,9 @@ blockquote {
 }
 
 body:has(.hero) .terminal-nav {
-  margin-top: 1.5em;
+  margin-top: 2em;
   padding-top: 1em;
+  border-top: none;
 }
 
 /* ─── Nav links alignment ─── */
