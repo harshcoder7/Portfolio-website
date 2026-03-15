@@ -1,0 +1,284 @@
+/* Terminal Poet — warm paper aesthetic */
+
+:root {
+  /* Dark Observatory — deep charcoal with warm undertone */
+  --bg-h: 220;
+  --bg-s: 15%;
+  --bg-l: 8%;
+
+  /* Refined typography */
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Cascadia Code', monospace;
+  --container-width: 60ch;
+}
+
+/* Light mode override for users who prefer it */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-h: 220;
+    --bg-s: 10%;
+    --bg-l: 12%;
+  }
+}
+
+/* Subtle page entrance */
+body {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Force bright text globally ─── */
+body, p, li, span, div, td, th {
+  color: #e8e8e8 !important;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #ffffff !important;
+}
+
+a {
+  color: #c0c0c0 !important;
+}
+
+a:hover {
+  color: #ffffff !important;
+}
+
+time {
+  color: #888 !important;
+}
+
+/* ─── Homepage: fit everything in one screen, centered ─── */
+body:has(.hero) {
+  height: 100vh;
+  padding: 0 2em;
+  gap: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+body:has(.hero) header {
+  display: none;
+}
+
+body:has(.hero) main {
+  width: 100%;
+  max-width: var(--container-width);
+}
+
+body:has(.hero) footer {
+  padding-top: 0.8em;
+  width: 100%;
+  max-width: var(--container-width);
+}
+
+/* ─── Hero section on homepage ─── */
+.hero {
+  padding: 0;
+}
+
+.hero-name {
+  font-size: 2.8em;
+  font-weight: bold;
+  color: #ffffff !important;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.4em 0;
+  line-height: 1.1;
+}
+
+.hero-tagline {
+  font-size: 1.3em;
+  color: #b0b0b0 !important;
+  margin: 0 0 0.4em 0;
+  font-style: italic;
+}
+
+.hero-bio {
+  font-size: 1.05em;
+  color: #d0d0d0 !important;
+  line-height: 1.7;
+  max-width: 55ch;
+  margin: 0 0 0.4em 0;
+}
+
+.hero-sub {
+  font-size: 0.95em;
+  color: #777 !important;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Refined link underlines */
+a {
+  border-bottom: 1px dotted var(--color-text-muted);
+  transition: border-color 0.2s ease;
+}
+
+a:hover {
+  border-bottom-style: solid;
+  border-color: var(--color-text-primary);
+}
+
+/* Blockquotes — pull quote style */
+blockquote {
+  border-left: 3px solid var(--color-text-muted);
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  padding-left: 1.5em;
+  margin: 2em 0;
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+/* Project cards in list view */
+.time-list li {
+  padding: 0.75em 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.time-list li:last-child {
+  border-bottom: none;
+}
+
+/* Terminal nav refinement */
+.terminal-nav {
+  border-top: 1px solid var(--color-border);
+  margin-top: 1.5em;
+  padding-top: 1em;
+}
+
+body:has(.hero) .terminal-nav {
+  margin-top: 1.5em;
+  padding-top: 1em;
+}
+
+/* ─── Nav links alignment ─── */
+.terminal-nav nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 2em;
+  justify-content: center;
+}
+
+.terminal-nav nav ul li {
+  display: inline-block;
+}
+
+.terminal-nav nav ul li a {
+  font-size: 1em;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  border-bottom: none !important;
+  padding: 0.3em 0;
+}
+
+/* Footer refinement */
+footer {
+  font-size: 0.85em;
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.5em;
+}
+
+/* Heading refinement — remove counters on about/project pages for cleaner look */
+h1::before {
+  content: none !important;
+}
+
+/* Code blocks — slightly warmer */
+pre {
+  box-shadow: none;
+  border: 1px solid var(--color-border);
+}
+
+/* Selection color */
+::selection {
+  background: hsl(220 30% 30%);
+  color: #fff;
+}
+
+/* Smooth transitions for interactive elements */
+a, pre, blockquote, img {
+  transition: all 0.2s ease;
+}
+
+/* Image refinement */
+img {
+  box-shadow: none;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+/* Horizontal rules */
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 2em 0;
+}
+
+/* Tags styling */
+.terms-list ul li {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.terms-list ul li:hover {
+  opacity: 1;
+}
+
+/* ─── Audio Toggle Button ─── */
+.audio-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}
+
+.audio-toggle:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.audio-toggle .audio-icon {
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+/* Pulsing ring when audio is playing */
+.audio-toggle.playing {
+  opacity: 1;
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+.audio-toggle.playing .audio-icon {
+  color: var(--color-text-primary);
+}
+
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 hsla(var(--bg-h), var(--bg-s), 50%, 0.3); }
+  50% { box-shadow: 0 0 0 8px hsla(var(--bg-h), var(--bg-s), 50%, 0); }
+}

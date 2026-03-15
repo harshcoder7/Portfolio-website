@@ -1,0 +1,51 @@
+baseURL = 'https://harshjha.dev/'
+languageCode = 'en-us'
+title = 'Harsh Jha'
+theme = "shibui"
+
+[params]
+  description = "AI Engineer — building intelligent systems that think, learn, and create."
+
+  [params.author]
+    name = "Harsh Jha"
+    email = "harsh.iiit78@gmail.com"
+
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = false
+    noClasses = true
+    tabWidth = 4
+    style = "algol_nu"
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = true
+
+[menu]
+  [[menu.main]]
+    name = "Projects"
+    url = "/projects/"
+    weight = 1
+  [[menu.main]]
+    name = "Blog"
+    url = "/posts/"
+    weight = 2
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 3
+
+[build]
+  writeStats = true
+
+[frontmatter]
+  date = ['date', 'publishDate', 'lastmod']
+  expiryDate = ['expiryDate']
+  lastmod = [':git', 'lastmod', 'date', 'publishDate']
+  publishDate = ['publishDate', 'date']

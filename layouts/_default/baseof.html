@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html
+  lang="{{ site.Language.LanguageCode }}"
+  dir="{{ or site.Language.LanguageDirection `ltr` }}"
+>
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <header>{{ partial "header.html" . }}</header>
+    <main id="main-content">{{ block "main" . }}{{ end }}</main>
+    <footer>{{ partial "footer.html" . }}</footer>
+
+    <!-- Ambient Audio Toggle -->
+    <div class="audio-toggle" id="audioToggle" title="Toggle ambient sound">
+      <span class="audio-icon" id="audioIcon">&#9835;</span>
+    </div>
+    <audio id="ambientAudio" loop preload="none">
+      <source src="/audio/ambient.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+      (function() {
+        var btn = document.getElementById('audioToggle');
+        var audio = document.getElementById('ambientAudio');
+        var playing = false;
+
+        audio.volume = 0.3;
+
+        // ─── Audio toggle ───
+        btn.addEventListener('click', function() {
+          if (playing) {
+            audio.pause();
+            btn.classList.remove('playing');
+            playing = false;
+          } else {
+            audio.play();
+            btn.classList.add('playing');
+            playing = true;
+          }
+        });
+
+        // ─── SPA-style navigation: swap content, keep audio alive ───
+        function isInternalLink(a) {
+          return a.hostname === location.hostname &&
+                 !a.getAttribute('href').startsWith('#') &&
+                 !a.hasAttribute('download') &&
+                 a.target !== '_blank';
+        }
+
+        function navigateTo(url, pushState) {
+          fetch(url)
+            .then(function(res) { return res.text(); })
+            .then(function(html) {
+              var parser = new DOMParser();
+              var doc = parser.parseFromString(html, 'text/html');
+
+              // Swap header, main content, and footer
+              var newHeader = doc.querySelector('header');
+              var newMain = doc.getElementById('main-content');
+              var newFooter = doc.querySelector('footer');
+              var newTitle = doc.querySelector('title');
+
+              if (newHeader) document.querySelector('header').innerHTML = newHeader.innerHTML;
+              if (newMain) document.getElementById('main-content').innerHTML = newMain.innerHTML;
+              if (newFooter) document.querySelector('footer').innerHTML = newFooter.innerHTML;
+              if (newTitle) document.title = newTitle.textContent;
+
+              if (pushState) {
+                history.pushState(null, '', url);
+              }
+
+              window.scrollTo(0, 0);
+
+              // Re-attach link listeners to new content
+              attachLinkListeners();
+            })
+            .catch(function() {
+              // Fallback to normal navigation if fetch fails
+              window.location.href = url;
+            });
+        }
+
+        function attachLinkListeners() {
+          var links = document.querySelectorAll('a[href]');
+          links.forEach(function(link) {
+            if (isInternalLink(link) && !link.dataset.spa) {
+              link.dataset.spa = 'true';
+              link.addEventListener('click', function(e) {
+                e.preventDefault();
+                navigateTo(link.href, true);
+              });
+            }
+          });
+        }
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function() {
+          navigateTo(location.href, false);
+        });
+
+        // Attach to all current links
+        attachLinkListeners();
+      })();
+    </script>
+  </body>
+</html>
